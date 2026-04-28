@@ -13,7 +13,7 @@ export function toBVAddress(hash: string): string {
   }
   try {
     const bytes = Buffer.from(hash.slice(2), 'hex');
-    const checksum = new Uint8Array(sha256.arrayBuffer(bytes)).slice(0, CHECKSUM_BYTES);
+    const checksum = new Uint8Array(sha256.arrayBuffer(new Uint8Array(bytes))).slice(0, CHECKSUM_BYTES);
     const combined = Buffer.concat([bytes, Buffer.from(checksum)]);
     return BV_PREFIX + bs58.encode(combined);
   } catch {
@@ -30,7 +30,7 @@ export function fromBVAddress(hash: string): string | null {
     if (decoded.length !== ADDRESS_BYTES + CHECKSUM_BYTES) return null;
     const addressBytes = decoded.slice(0, ADDRESS_BYTES);
     const checksum = decoded.slice(ADDRESS_BYTES);
-    const expected = new Uint8Array(sha256.arrayBuffer(addressBytes)).slice(0, CHECKSUM_BYTES);
+    const expected = new Uint8Array(sha256.arrayBuffer(new Uint8Array(addressBytes))).slice(0, CHECKSUM_BYTES);
     for (let i = 0; i < CHECKSUM_BYTES; i++) {
       if (checksum[i] !== expected[i]) return null;
     }

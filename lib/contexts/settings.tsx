@@ -3,6 +3,7 @@ import React from 'react';
 import type { TimeFormat } from 'types/settings';
 import { ADDRESS_FORMATS, type AddressFormat } from 'types/views/address';
 
+import config from 'configs/app';
 import * as cookies from 'lib/cookies';
 
 import { useAppContext } from './app';
@@ -40,7 +41,10 @@ export function SettingsContextProvider({ children }: SettingsProviderProps) {
 
   const toggleAddressFormat = React.useCallback(() => {
     setAddressFormat(prev => {
-      const nextValue = prev === 'base16' ? 'bech32' : 'base16';
+      const availableFormats = config.UI.views.address.hashFormat.availableFormats;
+      const currentIndex = availableFormats.indexOf(prev);
+      const nextIndex = (currentIndex + 1) % availableFormats.length;
+      const nextValue = availableFormats[nextIndex] || 'base16';
       cookies.set(cookies.NAMES.ADDRESS_FORMAT, nextValue);
       return nextValue;
     });

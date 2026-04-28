@@ -1,9 +1,15 @@
 import React from 'react';
 
 import config from 'configs/app';
-import { BECH_32_SEPARATOR } from 'lib/address/bech32';
+import type { AddressFormat } from 'types/views/address';
 import { useSettingsContext } from 'lib/contexts/settings';
 import { Switch } from 'toolkit/chakra/switch';
+
+const FORMAT_LABELS: Record<AddressFormat, string> = {
+  base16: '0x (Hex)',
+  bech32: config.UI.views.address.hashFormat.bech32Prefix ? `${ config.UI.views.address.hashFormat.bech32Prefix }1 (Bech32)` : 'Bech32',
+  bv: 'BV (Base58Check)',
+};
 
 const SettingsAddressFormat = () => {
   const settingsContext = useSettingsContext();
@@ -14,17 +20,21 @@ const SettingsAddressFormat = () => {
 
   const { addressFormat, toggleAddressFormat } = settingsContext;
 
+  const isBV = addressFormat === 'bv';
+  const isBech32 = addressFormat === 'bech32';
+  const isChecked = isBech32 || isBV;
+
   return (
     <Switch
       id="address-format"
-      defaultChecked={ addressFormat === 'bech32' }
+      defaultChecked={ isChecked }
       onChange={ toggleAddressFormat }
       mt={ 4 }
       direction="rtl"
       justifyContent="space-between"
       w="100%"
     >
-      Show { config.UI.views.address.hashFormat.bech32Prefix }{ BECH_32_SEPARATOR } format
+      Show { FORMAT_LABELS[addressFormat] } format
     </Switch>
   );
 };

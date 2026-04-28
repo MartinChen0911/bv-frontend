@@ -1,4 +1,4 @@
-import { ADDRESS_REGEXP } from 'toolkit/utils/regexp';
+import { ADDRESS_REGEXP, BV_ADDRESS_REGEXP } from 'toolkit/utils/regexp';
 
 export type InputType = 'address' | 'cluster_name';
 
@@ -9,7 +9,7 @@ export function detectInputType(input: string): InputType {
 
   const trimmedInput = input.trim();
 
-  if (ADDRESS_REGEXP.test(trimmedInput)) {
+  if (ADDRESS_REGEXP.test(trimmedInput) || BV_ADDRESS_REGEXP.test(trimmedInput)) {
     return 'address';
   }
 

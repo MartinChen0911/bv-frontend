@@ -1,6 +1,7 @@
-import { ADDRESS_REGEXP } from 'toolkit/utils/regexp';
+import { ADDRESS_REGEXP, BV_ADDRESS_REGEXP } from 'toolkit/utils/regexp';
 
 export function isEvmAddress(address: string): boolean {
   if (!address) return false;
-  return ADDRESS_REGEXP.test(address.trim());
+  const trimmed = address.trim();
+  return ADDRESS_REGEXP.test(trimmed) || BV_ADDRESS_REGEXP.test(trimmed);
 }

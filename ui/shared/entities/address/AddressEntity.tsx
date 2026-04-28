@@ -6,6 +6,7 @@ import type { AddressParam } from 'types/api/addressParams';
 import { route } from 'nextjs/routes';
 
 import { toBech32Address } from 'lib/address/bech32';
+import { toBVAddress } from 'lib/address/bv';
 import { useAddressHighlightContext } from 'lib/contexts/addressHighlight';
 import { useSettingsContext } from 'lib/contexts/settings';
 import { Skeleton } from 'toolkit/chakra/skeleton';
@@ -215,7 +216,11 @@ const AddressEntity = (props: EntityProps) => {
   const highlightContext = useAddressHighlightContext(props.noHighlight);
   const settingsContext = useSettingsContext();
 
-  const altHash = !props.noAltHash && settingsContext?.addressFormat === 'bech32' ? toBech32Address(props.address.hash) : undefined;
+  const altHash = !props.noAltHash && settingsContext?.addressFormat === 'bech32'
+    ? toBech32Address(props.address.hash)
+    : !props.noAltHash && settingsContext?.addressFormat === 'bv'
+      ? toBVAddress(props.address.hash)
+      : undefined;
 
   // inside highlight context all tooltips should be interactive
   // because non-interactive ones will not pass 'onMouseLeave' event to the parent component

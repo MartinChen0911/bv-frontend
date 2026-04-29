@@ -177,6 +177,9 @@ importers:
       brotli-compress:
         specifier: 1.3.3
         version: 1.3.3
+      bs58:
+        specifier: ^5.0.0
+        version: 5.0.0
       crypto-js:
         specifier: ^4.2.0
         version: 4.2.0
@@ -231,6 +234,9 @@ importers:
       js-cookie:
         specifier: ^3.0.1
         version: 3.0.5
+      js-sha256:
+        specifier: ^0.9.0
+        version: 0.9.0
       magic-bytes.js:
         specifier: 1.8.0
         version: 1.8.0
@@ -10077,6 +10083,9 @@ packages:
 
   js-file-download@0.4.12:
     resolution: {integrity: sha512-rML+NkoD08p5Dllpjo0ffy4jRHeY6Zsapvr/W86N7E0yuzAO6qa5X9+xog6zQNlH102J7IXljNY2FtS6Lj3ucg==}
+
+  js-sha256@0.9.0:
+    resolution: {integrity: sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==}
 
   js-sha3@0.8.0:
     resolution: {integrity: sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==}
@@ -27969,6 +27978,8 @@ snapshots:
 
   js-file-download@0.4.12: {}
 
+  js-sha256@0.9.0: {}
+
   js-sha3@0.8.0: {}
 
   js-tokens@4.0.0: {}
@@ -28356,7 +28367,7 @@ snapshots:
       metro-cache: 0.83.5
       metro-core: 0.83.5
       metro-runtime: 0.83.5
-      yaml: 2.8.2
+      yaml: 2.8.3
     transitivePeerDependencies:
       - bufferutil
       - supports-color

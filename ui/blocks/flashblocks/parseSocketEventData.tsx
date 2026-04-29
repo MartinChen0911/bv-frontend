@@ -10,7 +10,7 @@ export async function parseSocketEventDataOptimism(event: MessageEvent) {
     } else {
       const arrayBuffer = await event.data.arrayBuffer();
       const u8Data = new Uint8Array(arrayBuffer);
-      const decompressedData = Buffer.from(await decompress(u8Data)).toString('utf-8');
+      const decompressedData = new TextDecoder().decode(await decompress(u8Data));
       return JSON.parse(decompressedData) as FlashblockItemApiOptimism;
     }
   } catch (error) {
